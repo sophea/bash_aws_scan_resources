@@ -8,3 +8,39 @@ aws scan resoureces for optimizataion costs
 # how to run it
 
 sh scan.sh
+
+````
+DATE SCAN : 18-03-2021
+REGION : ap-southeast-1, ACCOUNT_ID : 32900xxxxx
+=========Elastic IP - unassociated with instances=========
+=============AMIs==============
+    AIM Found 5
+    ============EC2 instances used by AMIs============
+       ec2-instance-id:i-00d16 - imageId : ami-01d7ced9e19e9
+       ec2-instance-id:i-03b677e367846 - imageId : ami-02f3d7454
+    ============UNUSED AMIs============
+    - ID:ami-060e52fa40fa - Name : beamnet-
+    - ID:ami-068300ac214e - Name : web-server-instance
+    - ID:ami-086cfda2807b85 - Name : fns-app-1-102
+    - ID:ami-09ab861fbf34 - Name : cbs-devbackup
+====================2 snapshots found=======
+====================2 snapshots exist for non-existing volumes:=======
+  - snap-061f365-vol-0470de3
+  - snap-04f9ba2bb38-vol-0bea52833
+ 
+=========Unused Snaphosts- (no ami attached)=========
+=========Unattached Volumes=====(aws ec2 delete-volume --volume-id)====
+============Scanning RDS snapshots=============
+================Active Security Groups ==============
+Security Groug used by instance: sg-0a6c2xxxd8
+Security Groug used by instance: sg-0027674xxx3bdc491a
+================Unused Security Groups==============
+ID:sg-06aee49ea0f6c8-Name:default
+ID:sg-07bcae3eab181d-Name:default
+ID:sg-0930186429974b8-Name:route53-internalzone-SG
+ID:sg-0ab6711a1879c-Name:dev-r53-resolver
+ID:sg-0bf2096e6d7b3fc3-Name:dev-vpc-endpoints
+ID:sg-0e0d7cf03246b-Name:ssh-from-vpn
+================ELB ==============
+
+````
