@@ -5,10 +5,11 @@ AMI=($(aws ec2 describe-images --owner self --region ap-southeast-1  --query 'Im
 echo "    AIM Found ${#AMI[@]}"
 
 # Get all running instances
-echo "    ============EC2 instances used by AMIs============"
+
 EC2_AMI=$(aws ec2 describe-instances --query 'Reservations[*].Instances[*].{Instance:InstanceId,ImageId:ImageId}' | jq '.[] |.[] | [("ec2-instance-id : "+ .Instance), ("image-id :" + .ImageId)] | join (" ")' | tr -d '[]," ')
 AMI_USED=()
 arrVar=()
+echo "    ============EC2 instances used by AMIs============"
 for item in $EC2_AMI
 do	
 	imageId=$(echo $item |  awk '{split($0,a,"image-id:"); print a[2]}')

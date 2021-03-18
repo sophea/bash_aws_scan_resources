@@ -125,3 +125,5 @@ done
 echo "================ELB =============="
 aws elbv2 describe-load-balancers | jq '.LoadBalancers[] | {LoadBalancerName: ("Name:" + .LoadBalancerName), State: ("State: " + .State.Code) } | join (" - ")' 
 
+
+source ./cloudwatch.sh
