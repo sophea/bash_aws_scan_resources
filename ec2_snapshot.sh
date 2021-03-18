@@ -3,12 +3,12 @@
 
 
 SNAPSHOT_NO_VOLUMES=()
-SNAPSHOT_VOLUMES=($(aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots[] | {SnapshotId: .SnapshotId, VolumeId: .VolumeId} | join("  - ") ' | tr -d '[]," '))
+SNAPSHOT_VOLUMES=($(aws ec2 describe-snapshots --owner-ids self | jq '.Snapshots[] | {SnapshotId: .SnapshotId, VolumeId: .VolumeId} | join("  - ") ' | tr -d '[]," '| tr -d '\r'))
 
 echo "====================${#SNAPSHOT_VOLUMES[@]} snapshots found======="
 
 ALL_VOLUMES=($(aws ec2 describe-volumes --query 'Volumes[].{ID: VolumeId}' --output text))
-ALL_VOLUMES+=("vol-088f5020af822f92a")
+#ALL_VOLUMES+=("vol-088f5020af822f92a")
 for sv in "${SNAPSHOT_VOLUMES[@]}"
 do
 	for v in "${ALL_VOLUMES[@]}"

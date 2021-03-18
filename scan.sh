@@ -127,3 +127,6 @@ aws elbv2 describe-load-balancers | jq '.LoadBalancers[] | {LoadBalancerName: ("
 
 
 source ./cloudwatch.sh
+
+source ./s3.sh
+source ./formation.sh
