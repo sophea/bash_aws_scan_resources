@@ -138,7 +138,10 @@ source ./formation.sh
 source ./apigetway.sh
 source ./lambda.sh
 
+source ./route53.sh
 
+
+################elapsed time process############3
 end_time="$(date +%s%N)"
 elapsed="$((($end_time-$start_time)/1000000/1000))"
 value=$(displaytime ${elapsed})
