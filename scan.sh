@@ -60,7 +60,7 @@ aws ec2 describe-volumes | jq '.Volumes[] | select(.Attachments | length <= 0)  
 ### RDS Snaphosts
 echo "============Scanning RDS snapshots============="
 #aws rds describe-db-snapshots | jq -r '.DBSnapshots[] |  [("ID:" +.DBSnapshotIdentifier), ("CreateTime:" + .SnapshotCreateTime)] | join (" ")' | tr -d '[]," '
-
+now="$(date +'%m/%d/%Y %H:%M:%S')"
 rds_date=$(aws rds describe-db-snapshots | jq -r '.DBSnapshots[] |  [("ID:" +.DBSnapshotIdentifier), ("CreateTime:" + .SnapshotCreateTime)] | join (" ")' | tr -d '[]," ')
 for item in ${rds_date}
 do
@@ -130,3 +130,6 @@ source ./cloudwatch.sh
 
 source ./s3.sh
 source ./formation.sh
+
+source ./apigetway.sh
+source ./lambda.sh
