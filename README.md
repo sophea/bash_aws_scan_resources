@@ -1,7 +1,22 @@
 # bash_aws_scan_resources
-aws scan resoureces for optimizataion costs
+aws scan resoureces for optimization costs
+
+-   EC2
+-   EIP
+-	ELB
+-	AMI / SNAPSHOT / VOLUMES
+-	RDS SNAPSHOT
+-	Security Group
+-	Cloudwatch
+-	CloudFormation
+-	LAMBDA
+-	APIGETWAY
+-	S3
+
 
 # Tools
+You need to install the following tools
+- shellscripts
 - aws cli
 - jq tool
 
@@ -44,3 +59,4 @@ ID:sg-0e0d7cf03246b-Name:ssh-from-vpn
 ================ELB ==============
 
 ````
+
