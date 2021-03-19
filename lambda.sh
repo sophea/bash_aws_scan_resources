@@ -4,7 +4,7 @@ source ./utils.sh
 
 echo "======================LambdaFunctions=========="
 
-LAMBDA_FUNCTION=$(aws lambda list-functions | jq -r '.Functions[] | {name: .FunctionName, Runtime: .Runtime , MemorySize: .MemorySize, LastModified: .LastModified} | join ("#")' | tr -d '\r')
+LAMBDA_FUNCTION=$(aws lambda list-functions | jq -r '.Functions[] | {name: .FunctionName, Runtime: .Runtime , MemorySize: .MemorySize|tostring, LastModified: .LastModified} | join ("#")' | tr -d '\r')
 
 now="$(date +'%m/%d/%Y %H:%M:%S')"
 
