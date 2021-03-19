@@ -11,6 +11,8 @@
 # Version : 1.0
 # 
 # -------------------------------------------------------------------------
+start_time="$(date +%s%N)"
+
 DATE="$(date +'%d-%m-%Y')"
 
 #--region ap-southeast-1
@@ -34,6 +36,8 @@ trim()
 
     echo "$trimmed"
 }
+##ec2 instances
+source ./ec2.sh
 
 ##EIP###
 echo "=========Elastic IP - unassociated with instances========="
@@ -133,3 +137,11 @@ source ./formation.sh
 
 source ./apigetway.sh
 source ./lambda.sh
+
+
+end_time="$(date +%s%N)"
+elapsed="$((($end_time-$start_time)/1000000/1000))"
+value=$(displaytime ${elapsed})
+echo -e "\n\n--------------------------------"
+echo "Total of $value elapsed for the process"
+echo -e "------------------------------------"
