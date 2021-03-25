@@ -37,9 +37,9 @@ do
 	#(Last modified: 2 years ago, python3.6)
 
 	if ((age > 90)); then
-		last_started="( started $(($age/30)) months ago)"
-		echo "$id - $name - $type - $last_started"
-		 #printf "%-25s name:%-15s type:%-10s %-30s\n" $id $name $type $last_started
+		last_started="(started $(($age/30)) months ago)"
+		#echo "$id - $name - $type - $last_started"
+		 printf "%-25s | %-15s | %-10s | %s\n" "$id" "$name" "$type" "$last_started"
 
 	fi
 
