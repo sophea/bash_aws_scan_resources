@@ -60,3 +60,8 @@ ID:sg-0e0d7cf03246b-Name:ssh-from-vpn
 
 ````
 
+
+=========Elastic IP - unassociated with instances=========
+13.251.193.246
+18.139.37.54
+3.0.53.234
