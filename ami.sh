@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-echo "=============AMIs=============="
+echo "=============AMIs (region ap-southeast-1 )=============="
 AMI=($(aws ec2 describe-images --owner self --region ap-southeast-1  --query 'Images[*].{ID:ImageId,Name:Name}' | jq '.[] | [("ID : "+ .ID), ("Name :" + .Name)] | join (" ")' | tr -d '[]," '))
 echo "    AIM Found ${#AMI[@]}"
 
@@ -18,13 +18,16 @@ do
 	AMI_USED+=("$imageId")
 
 done
-
-# Get all launch templates
-AMI_LT=$(aws ec2 describe-launch-template-versions --launch-template-id lt-0965c75df853d69d7 | jq '.LaunchTemplateVersions[]| .LaunchTemplateData.ImageId' | tr -d '[]," ')
-
-for item in $AMI_LT
+ALL_TEMPLATES=($(aws ec2 describe-launch-templates | jq '.LaunchTemplates[]| .LaunchTemplateId' | tr -d '[]," '| tr -d '\r'))
+for line in  ${ALL_TEMPLATES[@]}
 do
-	AMI_USED+=("$item")
+    # Get all launch templates
+    AMI_LT=$(aws ec2 describe-launch-template-versions --launch-template-id $line | jq '.LaunchTemplateVersions[]| .LaunchTemplateData.ImageId' | tr -d '[]," ')
+
+    for item in $AMI_LT
+    do
+        AMI_USED+=("$item")
+    done
 done
 ####find unused AMI
 for line in "${AMI[@]}"
