@@ -6,7 +6,10 @@ import os
 
 today=datetime.today().strftime('%Y-%m-%d')
 
+ec2 = boto3.client('ec2')
+
 region = os.getenv('REGION')
+
 ec2 = boto3.resource('ec2',region_name=region)
 
 def lambda_handler(event, context):
