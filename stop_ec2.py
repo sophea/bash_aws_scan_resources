@@ -10,6 +10,9 @@ ec2 = boto3.client('ec2')
 
 region = os.getenv('REGION')
 
+public_holidays= os.getenv('PUBLIC_HOLIDAYS')
+excluded_ids = os.getenv('EXCLUDED_IDS')
+
 #ec2 = boto3.client('ec2',region_name=region)
 ec2_resource = boto3.resource('ec2',region_name=region)
 
@@ -20,9 +23,15 @@ def lambda_handler(event, context):
     print("today :" + today)
     print("event " + str(event))
     print("context " + str(context))
+    print("public_holidays list " + public_holidays)
+    print("excluded_ids list " + public_holidays)
+   
+    days_json  = json.loads(public_holidays)
+    days = days_json["days"]
     
-    days = event["days"]
-    excludes = event["excludes"]
+    #days = event["days"]
+    #excludes = event["excludes"]
+    excludes = json.loads(excluded_ids)["excludes"]
     if today in days :
         print ("found - it is public holiday : " + today)
         isHoliday = True
@@ -91,4 +100,8 @@ def lambda_handler(event, context):
 #  ]
 #}
 
+
+## env
+#EXCLUDED_IDS	{"excludes": ["yyy","xx"]}
+#PUBLIC_HOLIDAYS	{"days": [ "2021-01-01", "2021-01-07", "2021-03-08", "2021-04-14", "2021-04-15", "2021-04-16", "2021-04-26", "2021-04-30", "2021-05-01", "2021-05-14", "2021-06-18", "2021-09-24", "2021-10-05", "2021-10-06", "2021-10-07", "2021-10-15", "2021-10-29", "2021-11-09", "2021-11-18", "2021-11-19", "2021-11-20" ]}
 
