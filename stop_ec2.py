@@ -10,7 +10,7 @@ ec2 = boto3.client('ec2')
 
 region = os.getenv('REGION')
 
-ec2 = boto3.client('ec2',region_name=region)
+#ec2 = boto3.client('ec2',region_name=region)
 ec2_resource = boto3.resource('ec2',region_name=region)
 
 def lambda_handler(event, context):
@@ -35,7 +35,8 @@ def lambda_handler(event, context):
     instances = ec2_resource.instances.filter(Filters=[{'Name': 'instance-state-name', 'Values': ['running']}])
     running_instances = [instance.id  for instance in instances if instance.id not in excludes]
     for id in running_instances:
-        ec2.stop_instances(InstanceIds=[id])
+        #ec2.stop_instances(InstanceIds=[id])
+        ec2_resource.Instance(id).stop()
         print ("stop_instances : " + id)
     
     return {
