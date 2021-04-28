@@ -23,7 +23,7 @@ def send_report():
     response = client.send_email(
         Source='mak.sophea@jtrustroyal.com',
         Destination={
-            'ToAddresses':  ['mak.sophea@jtrustroyal.com' ]
+            'ToAddresses':  ['mak.sophea@jtrustsystem.co.jp' ]
         },
         Message={
             'Subject': {

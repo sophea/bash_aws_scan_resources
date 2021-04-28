@@ -15,12 +15,24 @@ HOOK_URL = os.environ["HOOK_URL"]
 HOOK_URL_FINET= os.environ["FINET_HOOK_URL"]
 HOOK_URL_INTELLECT= os.environ["INTELLECT_HOOK_URL"]
 HOOK_URL_POWERCARD= os.environ["POWERCARD_HOOK_URL"]
-HOOK_URL_POWERCARD= os.environ["APIHUB_HOOK_URL"]
+HOOK_URL_APIHUB= os.environ["APIHUB_HOOK_URL"]
+HOOK_URL_DB= os.environ["DB_HOOK_URL"]
+HOOK_URL_WEB= os.environ["WEB_HOOK_URL"]
 
-webhook_map = {'finet':HOOK_URL_FINET,
+webhook_map = {
+                'finet':HOOK_URL_FINET,
+                'beamnet':HOOK_URL_FINET,
+                'controlm':HOOK_URL_FINET,
+                'fns':HOOK_URL_FINET,
+                
                 'intellect':HOOK_URL_INTELLECT,
                 'powercard':HOOK_URL_POWERCARD,
-                'apihub':HOOK_URL_APIHUB
+                
+                'apihub':HOOK_URL_APIHUB,
+                'sftp':HOOK_URL_APIHUB,
+                'db':HOOK_URL_DB,
+                'kartel':HOOK_URL_WEB,
+                'jasper':HOOK_URL_WEB
               }
 
 defaultRegion="ap-southeast-1"
@@ -46,8 +58,7 @@ def lambda_handler(event, context):
     account= event["account"]
     message = event["message"]
     ## region not same as defaultRegion
-    if defaultRegion != region:
-        
+    if defaultRegion != region:        
         ec2 = boto3.client('ec2',region_name=region)
         
     instances = get_instance_details(ec2, instanceId)
@@ -74,7 +85,7 @@ def lambda_handler(event, context):
     "title": "[" + ENV +"] server " + instanceName + " has changed state to " + state,
     "text": message
     }
-    logger.info(webhook_url)
+    #logger.info(webhook_url)
 
     req = Request(webhook_url, json.dumps(messages).encode("utf-8"))
     try:
@@ -100,8 +111,18 @@ def get_webhook_url(application):
     return webhook_map.get(application)
     
 def get_application_name(instance):
+    ##test if component tag is db --return it
+    if (get_component_name(instance) == 'db'):
+        return 'db'
+        
     for t in instance["Tags"]:
         if t["Key"] == "application":
+            return t["Value"]
+    return instance["InstanceId"]
+    
+def get_component_name(instance):
+    for t in instance["Tags"]:
+        if t["Key"] == "component":
             return t["Value"]
     return instance["InstanceId"]
     
