@@ -1,3 +1,9 @@
+# Requirements
+
+- The Bash shell. For Linux and macOS, this is included by default. In Windows 10, you can install the [Windows Subsystem for Linux](https://docs.microsoft.com/en-us/windows/wsl/install-win10) to get a Windows-integrated version of Ubuntu and Bash.
+- [The AWS CLI v1](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html).
+
+
 # bash_aws_scan_resources
 aws scan resoureces for optimization costs
 
