@@ -144,6 +144,7 @@ source ./aws_sftp.sh
 
 source ./aws_ecs.sh
 
+source ./aws_sns.sh
 ################elapsed time process############3
 end_time="$(date +%s%N)"
 elapsed="$((($end_time-$start_time)/1000000/1000))"
