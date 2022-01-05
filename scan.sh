@@ -140,6 +140,7 @@ source ./lambda.sh
 
 source ./route53.sh
 
+source ./aws_sftp.sh
 
 ################elapsed time process############3
 end_time="$(date +%s%N)"

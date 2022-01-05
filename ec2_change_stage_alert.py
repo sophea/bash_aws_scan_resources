@@ -8,7 +8,7 @@ from urllib.error import URLError, HTTPError
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
-ENV=os.environ["ENV"]
+ENV=os.getenv("ENV")
 
 ##default webhook :
 HOOK_URL = os.environ["HOOK_URL"]
