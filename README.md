@@ -23,8 +23,8 @@ aws scan resoureces for optimization costs
 # Tools
 You need to install the following tools
 - shellscripts
-- aws cli
-- jq tool
+- [aws cli](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) 
+- [jq tool](https://customer.precisely.com/s/article/Data360-Analyze-How-to-use-jq-on-Windows-360059947393?language=en_US)
 # set aws-cli as local environment
 You need to install aws cli command set up ~/.aws/credentails
 ````
